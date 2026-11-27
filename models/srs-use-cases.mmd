@@ -1,0 +1,38 @@
+flowchart LR
+    student[学生]
+    admin[宿舍管理员]
+    worker[维修人员]
+    contractor[维修总包]
+    mail[第三方邮件服务]
+
+    subgraph system[校园宿舍报修与维修服务管理系统]
+        uc01([UC-01 登录与退出])
+        uc02([UC-02 提交报修])
+        uc03([UC-03 查询报修进度])
+        uc04([UC-04 代录、审核与补充])
+        uc05([UC-05 关联重复公共区域报修])
+        uc06([UC-06 派单与维修安排])
+        uc07([UC-07 接单、更新进展与登记完工])
+        uc08([UC-08 验收、返修与评价])
+        uc09([UC-09 通知报修人])
+        uc10([UC-10 跟进积压与超时验收])
+        uc11([UC-11 维护报修地点])
+    end
+
+    student --- uc01
+    student --- uc02
+    student --- uc03
+    student ---|补充信息| uc04
+    student --- uc08
+    student ---|接收通知| uc09
+    admin --- uc01
+    admin ---|代录与审核| uc04
+    admin --- uc05
+    admin --- uc06
+    admin ---|代录| uc07
+    admin --- uc10
+    admin --- uc11
+    worker --- uc01
+    worker --- uc07
+    admin -. 外部维修时联系 .-> contractor
+    mail --- uc09
